@@ -18,7 +18,7 @@ description = '''An early version of the new Discord bot for Cataclysm'''
 
 bot = commands.Bot(command_prefix=config["bot_prefix"], description=description)
 
-cataServer = MinecraftServer.lookup("cataclysm.cc")
+mcServer = MinecraftServer.lookup(["minecraft_server_address"])
 
 @bot.event
 async def on_ready():
@@ -27,6 +27,15 @@ async def on_ready():
 @bot.command()
 async def add(ctx, left: int, right: int):
 	await ctx.send(left + right)
+
+@bot.command()
+async def status(ctx):
+	status = mcServer.status()
+	try:
+		status = mcServer.status()
+		await ctx.send("There are {0} players online".format(status.players.online))
+	except:
+		await ctx.send("Error reaching the server")
 
 
 
