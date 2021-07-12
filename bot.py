@@ -18,7 +18,7 @@ description = '''An early version of the new Discord bot for Cataclysm'''
 
 bot = commands.Bot(command_prefix=config["bot_prefix"], description=description)
 
-mcServer = MinecraftServer.lookup(["minecraft_server_address"])
+mcServer = MinecraftServer.lookup(config["minecraft_server_address"])
 
 @bot.event
 async def on_ready():
